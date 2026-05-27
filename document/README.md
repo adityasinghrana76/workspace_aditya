@@ -17,7 +17,7 @@ English documentation for evaluators. For step-by-step learning notes (Hinglish)
 
 ## Repository
 
-- **GitHub:** https://github.com/doonops/workspace_aditya
+- **GitHub:** https://github.com/adityasinghrana76/workspace_aditya
 - **CI/CD workflow:** `.github/workflows/deploy.yml`
 - **Live health (replace with your EC2 IP):** `http://<EC2_PUBLIC_IP>/health`
 
