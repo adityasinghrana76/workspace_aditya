@@ -80,8 +80,8 @@ curl -f http://localhost/health
 Public verification from your machine:
 
 ```text
-http://<EC2_PUBLIC_IP>/health
-http://<EC2_PUBLIC_IP>/docs
+http://13.126.41.46/health
+http://13.126.41.46/docs
 ```
 
 ## 6. Troubleshooting
