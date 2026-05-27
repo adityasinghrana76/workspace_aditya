@@ -1,0 +1,105 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ec2
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout (for repo context)
+        uses: actions/checkout@v4
+
+      - name: Validate required secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${{ secrets.EC2_HOST }}" ]; then
+            echo "Missing secret: EC2_HOST (public IP/DNS without http://)"
+            exit 1
+          fi
+          if [ -z "${{ secrets.EC2_USER }}" ]; then
+            echo "Missing secret: EC2_USER (e.g. ubuntu)"
+            exit 1
+          fi
+          if [ -z "${{ secrets.EC2_SSH_KEY }}" ]; then
+            echo "Missing secret: EC2_SSH_KEY (EC2 private key contents, including BEGIN/END)"
+            exit 1
+          fi
+          if [ -z "${{ secrets.APP_PATH }}" ]; then
+            echo "Missing secret: APP_PATH (e.g. /opt/app)"
+            exit 1
+          fi
+
+      - name: Deploy via SSH (docker compose)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+
+            # Ensure utilities exist
+            if ! command -v curl >/dev/null 2>&1; then
+              sudo apt-get update
+              sudo apt-get install -y curl
+            fi
+
+            APP_PATH="${{ secrets.APP_PATH }}"
+            cd "$APP_PATH"
+
+            if [ ! -d ".git" ]; then
+              echo "Error: git repo not found at $APP_PATH"
+              echo "Phase 5: server pe pehle manual git clone karke repo root me deploy karo."
+              exit 1
+            fi
+
+            # Pull latest code and rebuild containers
+            git pull --ff-only origin main
+            docker compose pull || true
+            docker compose up -d --build
+            docker compose ps
+
+            # Container-level health check (from server)
+            echo "Waiting for /health to become ready..."
+            for i in {1..20}; do
+              if curl -fsS http://localhost/health >/dev/null 2>&1; then
+                echo "Health check passed"
+                exit 0
+              fi
+              sleep 2
+            done
+
+            echo "Health check failed. Last logs:"
+            docker compose logs --tail=200 api nginx || true
+            exit 1
+
+      - name: Public health check (runner)
+        if: success()
+        run: |
+          set -euo pipefail
+          HEALTH_URL="http://${{ secrets.EC2_HOST }}/health"
+          echo "Checking: $HEALTH_URL"
+
+          for i in {1..20}; do
+            code="$(curl -sS -o /dev/null -w "%{http_code}" "$HEALTH_URL" || true)"
+            if [ "$code" = "200" ]; then
+              echo "Public health OK"
+              exit 0
+            fi
+            sleep 2
+          done
+
+          echo "Public health not reachable (check EC2 Security Group: allow port 80)"
+          exit 1
+

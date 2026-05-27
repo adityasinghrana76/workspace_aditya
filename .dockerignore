@@ -1,0 +1,10 @@
+.venv
+__pycache__
+.git
+.env
+*.md
+document/
+backups/
+nginx/ssl/
+.idea
+.vscode
