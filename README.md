@@ -13,7 +13,7 @@ Replace with your EC2 public IP:
 ## Repository
 
 - **GitHub:** https://github.com/adityasinghrana76/workspace_aditya
-- **Reviewer documentation (English):** [document/README.md](./document/README.md)
+- **Reviewer documentation:** [document/README.md](./document/README.md)
 
 ## Architecture
 
