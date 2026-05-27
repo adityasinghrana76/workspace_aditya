@@ -53,7 +53,7 @@ newgrp docker
 sudo mkdir -p /opt/app
 sudo chown ubuntu:ubuntu /opt/app
 cd /opt/app
-git clone https://github.com/doonops/workspace_aditya.git workspace_aditya
+git clone https://github.com/adityasinghrana76/workspace_aditya.git workspace_aditya
 cd workspace_aditya
 ```
 
