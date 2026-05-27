@@ -5,7 +5,7 @@
 The deployment is served over **HTTP** on the EC2 public IP:
 
 ```text
-http://<EC2_PUBLIC_IP>/health
+http://13.126.41.46/health
 ```
 
 This is acceptable for the assignment demo when no domain is available. TLS termination is designed to sit on **NGINX** when a domain is added.
