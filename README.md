@@ -14,7 +14,6 @@ Replace with your EC2 public IP:
 
 - **GitHub:** https://github.com/adityasinghrana76/workspace_aditya
 - **Reviewer documentation (English):** [document/README.md](./document/README.md)
-- **Learning guides (Hinglish):** [guide/README.md](./guide/README.md)
 
 ## Architecture
 
