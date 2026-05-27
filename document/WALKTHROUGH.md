@@ -77,6 +77,6 @@ curl -X POST http://<EC2_IP>/chat \
 
 ## Repository links
 
-- **Code:** https://github.com/doonops/workspace_aditya
+- **Code:** https://github.com/adityasinghrana76/workspace_aditya
 - **Workflow:** `.github/workflows/deploy.yml`
 - **Docs index:** [README.md](./README.md)
