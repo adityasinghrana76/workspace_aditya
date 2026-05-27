@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - AWS account with EC2 access
-- GitHub repository: `doonops/workspace_aditya`
+- GitHub repository: `adityasinghrana76/workspace_aditya`
 - Local SSH key pair (`.pem`) for the EC2 instance
 
 ## 1. Launch EC2
