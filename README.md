@@ -6,13 +6,13 @@ FastAPI backend with PostgreSQL, Redis, and NGINX, deployed on AWS EC2 with GitH
 
 Replace with your EC2 public IP:
 
-- **Health:** `http://<EC2_PUBLIC_IP>/health`
-- **API docs:** `http://<EC2_PUBLIC_IP>/docs`
-- **Chat:** `POST http://<EC2_PUBLIC_IP>/chat`
+- **Health:** `http://13.126.41.46/health`
+- **API docs:** `http://13.126.41.46/docs`
+- **Chat:** `POST http://13.126.41.46/chat`
 
 ## Repository
 
-- **GitHub:** https://github.com/doonops/workspace_aditya
+- **GitHub:** https://github.com/adityasinghrana76/workspace_aditya
 - **Reviewer documentation (English):** [document/README.md](./document/README.md)
 - **Learning guides (Hinglish):** [guide/README.md](./guide/README.md)
 
