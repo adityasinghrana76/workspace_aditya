@@ -19,13 +19,13 @@ English documentation for evaluators. For step-by-step learning notes (Hinglish)
 
 - **GitHub:** https://github.com/adityasinghrana76/workspace_aditya
 - **CI/CD workflow:** `.github/workflows/deploy.yml`
-- **Live health (replace with your EC2 IP):** `http://<EC2_PUBLIC_IP>/health`
+- **Live health (replace with your EC2 IP):** `http://13.126.41.46/health`
 
 ## Quick verification
 
 ```bash
 curl http://<EC2_PUBLIC_IP>/health
-curl -X POST http://<EC2_PUBLIC_IP>/chat \
+curl -X POST http://13.126.41.46/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"hello"}'
 ```
