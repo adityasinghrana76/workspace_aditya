@@ -35,14 +35,14 @@ Expected: `"status":"ok"`, `"database":"connected"`, `"redis":"connected"`.
 Open in browser:
 
 ```text
-http://<EC2_IP>/health
-http://<EC2_IP>/docs
+http://13.126.41.46/health
+http://13.126.41.46/docs
 ```
 
 Test chat:
 
 ```bash
-curl -X POST http://<EC2_IP>/chat \
+curl -X POST http://13.126.41.46/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"hello"}'
 ```
